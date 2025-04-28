@@ -1,0 +1,15 @@
+# Entorno virtual de Python
+venv/
+
+# Node modules de React
+frontend/node_modules/
+
+# Build de producción de React
+frontend/dist/
+
+# Archivos del sistema de Mac
+.DS_Store
+
+# Archivos de entorno sensibles
+*.env
+
