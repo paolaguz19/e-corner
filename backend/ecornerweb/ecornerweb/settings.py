@@ -75,8 +75,9 @@ DATABASES = {
         'NAME': 'e-corner',
         'USER': 'root',
         'PASSWORD': 'Mark3021',  # o la que hayas definido
-        'HOST': '127.0.0.1',
+        'HOST': 'localhost',  # o la IP de tu servidor
         'PORT': '3306',  # si usás MySQL por Homebrew
+        'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
     }
 }
 

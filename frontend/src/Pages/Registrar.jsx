@@ -9,7 +9,7 @@ function Registrar() {
   const [apellido, setApellido] = useState('');
   const [email, setEmail] = useState('');
   const [cedula, setCedula] = useState('');
-  const [fecha_nacimiento, setFecha_Nacimiento] = useState('');
+  const [Fecha_nacimiento, setFecha_Nacimiento] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -19,29 +19,24 @@ function Registrar() {
   }, []);
 
   const handleRegister = async (e) => {
-    e.preventDefault(); 
+    e.preventDefault(); // Detener recarga del formulario
 
     const userData = {
       nombre,
       apellido,
       email,
       cedula,
-      fecha_nacimiento,
+      Fecha_nacimiento, // IMPORTANTE: debe coincidir con lo que espera Django
       password,
     };
 
-    
-    const jsonUserData = JSON.stringify(userData); 
-
     try {
-      
-      const response = await axios.post("http://localhost:8000/api/users/", jsonUserData, {
+      const response = await axios.post("http://localhost:8000/api/users/", userData, {
         headers: {
-          "Content-Type": "application/json", 
+          "Content-Type": "application/json",
         },
       });
 
-      
       if (response.status === 201) {
         setSuccess("✅ Usuario registrado exitosamente.");
         setTimeout(() => navigate("/ingresar"), 2000); 
@@ -49,7 +44,6 @@ function Registrar() {
         setError("❌ Error al registrar el usuario.");
       }
     } catch (err) {
-     
       setError("❌ Error en la conexión con el servidor.");
     }
   };
@@ -58,7 +52,9 @@ function Registrar() {
     <div className="flex justify-center items-center h-screen bg-indigo-500">
       <div className="bg-gray-800 p-8 rounded-lg shadow-md w-full max-w-md">
         <h2 className="text-2xl font-semibold mb-6 text-center text-white">Registro</h2>
-        <form onSubmit={(e) => e.preventDefault()}>
+
+        {/* AQUÍ la corrección en el form */}
+        <form onSubmit={handleRegister}>
           <input
             type="text"
             placeholder="Nombre"
@@ -83,7 +79,7 @@ function Registrar() {
           <input
             type="date"
             placeholder="Fecha de nacimiento"
-            value={fecha_nacimiento}
+            value={Fecha_nacimiento}
             onChange={(e) => setFecha_Nacimiento(e.target.value)}
             className="w-full mb-4 px-3 py-2 border rounded bg-gray-700 border-transparent text-gray-400"
           />
@@ -101,14 +97,16 @@ function Registrar() {
             onChange={(e) => setPassword(e.target.value)}
             className="w-full mb-4 px-3 py-2 border rounded bg-gray-700 border-transparent text-white"
           />
+          
+          {/* AQUÍ la corrección en el botón */}
           <button
-            type="button"
-            onClick={handleRegister}
+            type="submit"
             className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded"
           >
             Registrarse
           </button>
         </form>
+
         {success && <p className="text-green-600 mt-4">{success}</p>}
         {error && <p className="text-red-600 mt-4">{error}</p>}
       </div>
