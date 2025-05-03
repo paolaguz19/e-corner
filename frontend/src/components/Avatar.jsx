@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import {Dropdown,initTWE,} from "tw-elements";
 import Search from "./Search";
 import { NavLink } from "react-router-dom";
+import { logoutUser } from "../api/logout";
+
 
 
 
@@ -99,11 +101,20 @@ function Avatar() {
 
                             </li>
                             <li>
-                                <a
-                                    class="block w-full items-center justify-center whitespace-nowrap bg-indigo-400 px-1 py-1 text-sm font-normal text-neutral-700 hover:bg-zinc-200/60 focus:bg-zinc-200/60 focus:outline-none active:bg-zinc-200/60 active:no-underline dark:bg-surface-dark dark:text-white dark:hover:bg-neutral-800/25 dark:focus:bg-neutral-800/25 dark:active:bg-neutral-800/25"
-                                    href="#"
-                                    data-twe-dropdown-item-ref
-                                >Cerrar sesión</a>
+                            <button
+                                onClick={async () => {
+                                try {
+                                    await logoutUser();
+                                    window.location.href = "/Ingresar";  // Redirige tras logout
+                                } catch (error) {
+                                    alert("❌ Error al cerrar sesión.");
+                                }
+                                }}
+                                className="block w-full items-center justify-center whitespace-nowrap bg-indigo-400 px-1 py-1 text-sm font-normal text-neutral-700 hover:bg-zinc-200/60 focus:bg-zinc-200/60 focus:outline-none active:bg-zinc-200/60 active:no-underline dark:bg-surface-dark dark:text-white dark:hover:bg-neutral-800/25 dark:focus:bg-neutral-800/25 dark:active:bg-neutral-800/25"
+                                data-twe-dropdown-item-ref
+                                >
+                                Cerrar sesión
+                            </button>
                             </li>
                         </ul>
                     </div>

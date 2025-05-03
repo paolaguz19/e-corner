@@ -2,7 +2,8 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './Pages/Home';
 import Registrar from './Pages/Registrar';
-import Ingresar from './Pages/Ingresar';  
+import Ingresar from './Pages/Ingresar';
+import CrearPublicacion from './Pages/CrearPublicacion';  
 import Nav from './components/Nav';
 import Footer from './components/Footer';
 import Cards from './components/Cards';
@@ -20,6 +21,7 @@ function AppRoutes() {
           {/* Rutas para las páginas de registrar e ingresar */}
           <Route path="/registrar" element={<Registrar />} />
           <Route path="/ingresar" element={<Ingresar />} />
+          <Route path="/crear-publicacion" element={<CrearPublicacion />} />
           <Route path="*" element={<Home />} />
         </Routes>
       </div>

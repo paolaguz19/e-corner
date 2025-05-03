@@ -12,8 +12,8 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name="index.html"), name='home'),  # Ruta para la vista principal
     path('registrar/', views.register_view, name='registrar'),
     path('ingresar/', views.login_view, name='ingresar'),
+    path('api/', include('publicaciones.api.urls')),  # Rutas para la API de publicaciones
 ]
-
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.BASE_DIR / 'frontend/dist/assets')
 

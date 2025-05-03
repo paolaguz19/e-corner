@@ -32,7 +32,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'users'
+    'users',
+    'publicaciones',
 ]
 
 MIDDLEWARE = [
@@ -51,7 +52,7 @@ ROOT_URLCONF = 'ecornerweb.urls'
 TEMPLATES = [
     {
          'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(REPO_ROOT, 'dist')],  
+        'DIRS': [BASE_DIR / 'ecornerweb' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -117,10 +118,10 @@ USE_TZ = True
 STATIC_URL = '/static/'  # URL for static files (used by Django)
 
 # Static files configuration for React's build
-STATICFILES_DIRS = [
-    BASE_DIR / 'dist'/'assets',  # Adjust this path to where the build files are located
-]
-STATIC_ROOT = REPO_ROOT / 'staticfiles'
+STATICFILES_DIRS = [BASE_DIR.parent / 'frontend' / 'dist' / 'assets']
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
